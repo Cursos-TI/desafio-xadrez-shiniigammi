@@ -9,20 +9,21 @@
 #define MOV_RAINHA 8
 
 
-// Função com Loop Aninhado - Bispo
-void movimentarBispo() {
-    printf("--------------------------\n");
-    printf("### Movimentação do Bispo ( 5 Casas Diagonal Superior Direita) ###\n");
-    printf("--------------------------\n");
-
-    for (int i = 0; i < MOV_BISPO; i++) {
-        for (int j = 0; j < 1; j++) {  // Loop interno apenas para atender o requisito
-            printf("Cima\n");
-            printf("Direita\n");
-        }
+      // Função recursiva para o Bispo - Nível Mestre
+void movimentarBispoRecursivo(int movimentos) {
+    if (movimentos == MOV_BISPO && MOV_BISPO > 0) { // Adicionado MOV_BISPO > 0 para consistência
+        printf("--------------------------\n");
+        printf("### Movimentação do Bispo (Recursivo - %d Casas Diagonal Superior Direita) ###\n", MOV_BISPO);
+        printf("--------------------------\n");
     }
 
-    printf("\n--------------------------\n");
+    if (movimentos == 0) {
+        printf("\n--------------------------\n");
+        return;
+    }
+
+    printf("Cima, Direita\n"); // Ou "Cima\nDireita\n" se preferir
+    movimentarBispoRecursivo(movimentos - 1);
 }
 
 
@@ -94,10 +95,10 @@ void movimentarCavalo() {
 
 // Função Principal
 int main() {
-    movimentarBispo();             // Usando loop aninhado
-    movimentarTorre(MOV_TORRE);    // Usando recursão
-    movimentarRainha(MOV_RAINHA);  // Usando recursão
-    movimentarCavalo();            // Usando condições e variáveis múltiplas
+    movimentarBispoRecursivo(MOV_BISPO);    // Usando Recursão
+    movimentarTorre(MOV_TORRE);             // Usando recursão
+    movimentarRainha(MOV_RAINHA);           // Usando recursão
+    movimentarCavalo();                     // Usando condições e variáveis múltiplas
 
     return 0;
 }
